@@ -34,7 +34,7 @@ RUN apt-get update -yqq \
     && pip install airflow[ldap] \
     && pip install airflow[password] \
     && pip install airflow[s3] \
-    && pip install airflow[slack]
+    && pip install airflow[slack] \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \

@@ -1,9 +1,9 @@
 # Airflow Dockerfile
-Circle CI : [![](https://circleci.com/gh/puckel/docker-airflow.svg?style=svg)](https://circleci.com/gh/puckel/docker-airflow)
+Circle CI : [![](https://circleci.com/gh/camilb/docker-airflow.svg?style=svg)](https://circleci.com/gh/camilb/docker-airflow)
 
-ImageLayers : [![](https://badge.imagelayers.io/puckel/docker-airflow:latest.svg)](https://imagelayers.io/?images=puckel/docker-airflow:latest)
+ImageLayers : [![](https://badge.imagelayers.io/camil/airflow:latest.svg)](https://imagelayers.io/?images=camil/airflow:latest)
 
-This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/airflow) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/puckel/docker-airflow/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
+This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/airflow) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/camil/airflow/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
 
 ## Informations
 
@@ -14,13 +14,13 @@ This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/a
 
 ## Installation
 
-        docker pull puckel/docker-airflow
+        docker pull camil/airflow
 
 ## Build
 
 For example, if you need to install [Extra Packages](http://pythonhosted.org/airflow/installation.html#extra-package), edit the Dockerfile and than build-it.
 
-        docker build --rm -t puckel/docker-airflow .
+        docker build --rm -t camil/airflow .
 
 # Usage
 

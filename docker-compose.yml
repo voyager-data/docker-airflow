@@ -23,7 +23,7 @@ webserver:
     image: camil/airflow
     restart: always
     volumes:
-         - ~/airflow/dags:/usr/local/airflow/dags
+         - ~/docker-airflow/dags:/usr/local/airflow/dags
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     ports:
@@ -50,7 +50,7 @@ scheduler:
     image: camil/airflow
     restart: always
     volumes:
-        - ~/airflow/dags:/usr/local/airflow/dags
+        - ~/docker-airflow/dags:/usr/local/airflow/dags
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     links:
@@ -62,7 +62,7 @@ worker:
     image: camil/airflow
     restart: always
     volumes:
-        - ~/airflow/dags:/usr/local/airflow/dags
+        - ~/docker-airflow/dags:/usr/local/airflow/dags
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     ports:

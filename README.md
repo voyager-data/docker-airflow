@@ -7,7 +7,7 @@ This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/a
 
 ## Informations
 
-* Based on python:2.7 official Image [python:2.7](https://registry.hub.docker.com/_/python/)
+* Based on python:2.7 official Image (Debian Jessie) [python:2.7](https://registry.hub.docker.com/_/python/)
 * Install [Docker](https://www.docker.com/)
 * Install [Docker Compose](https://docs.docker.com/compose/install/)
 * Following the Airflow release from [Python Package Index](https://pypi.python.org/pypi/airflow)
@@ -15,17 +15,22 @@ This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/a
 ## Installation
 
         docker pull camil/airflow
+        cd ~
+        git clone https://github.com/camilb/docker-airflow.git
+        
 
 ## Build
 
 For example, if you need to install [Extra Packages](http://pythonhosted.org/airflow/installation.html#extra-package), edit the Dockerfile and than build-it.
 
+		cd ~/docker-airflow
         docker build --rm -t camil/airflow .
 
 # Usage
 
 Start the stack (mysql, rabbitmq, airflow-webserver, airflow-scheduler airflow-flower & airflow-worker) :
 
+		cd ~/docker-airflow
         docker-compose up -d
 
 If you want to use Ad hoc query, make sure you've configured connections :
@@ -48,8 +53,28 @@ Check [Airflow Documentation](http://pythonhosted.org/airflow/)
 
 ## Run the test "tutorial"
 
-        docker exec dockerairflow_webserver_1 airflow backfill tutorial -s 2015-05-01 -e 2015-06-01
-
+        docker exec airflow_webserver_1 airflow backfill tutorial -s 2016-01-01 -e 2016-02-01
+## Web Authentication: create user
+        docker exec -it airflow_webserver_1 python
+`Python 2.7.10 (default, Nov 20 2015, 05:21:22) 
+[GCC 4.9.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.`
+    
+`>>>`
+    
+	import airflow
+	from airflow import models, settings
+	from airflow.contrib.auth.backends.password_auth import PasswordUser
+	user = PasswordUser(models.User())
+	user.username = 'admin'
+	user.email = 'admin@admin.net'
+	user.password = 'secret'
+	session = settings.Session()
+	session.add(user)
+	session.commit()
+	session.close()
+	exit()
+	
 # Wanna help?
 
 Fork, improve and PR. ;-)

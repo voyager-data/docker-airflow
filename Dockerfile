@@ -2,7 +2,7 @@
 # AUTHOR: Camil Blanaru
 # DESCRIPTION: Basic Airflow container
 # BUILD: docker build --rm -t camil/airflow
-# SOURCE: https://github.com/camilb/airflow
+# SOURCE: https://github.com/camilb/docker-airflow
 
 FROM python:2.7
 MAINTAINER Camil Blanaru

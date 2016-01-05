@@ -1,20 +1,17 @@
-# VERSION 1.1
-# AUTHOR: Matthieu "Puckel_" Roisil
+# VERSION 1.0
+# AUTHOR: Camil Blanaru
 # DESCRIPTION: Basic Airflow container
-# BUILD: docker build --rm -t puckel/docker-airflow
-# SOURCE: https://github.com/puckel/docker-airflow
+# BUILD: docker build --rm -t camil/airflow
+# SOURCE: https://github.com/camilb/airflow
 
-FROM debian:wheezy
-MAINTAINER Puckel_
+FROM python:2.7
+MAINTAINER Camil Blanaru
 
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
-# Work around initramfs-tools running on kernel 'upgrade': <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=594189>
-ENV INITRD No
-ENV AIRFLOW_VERSION 1.6.1
+
 ENV AIRFLOW_HOME /usr/local/airflow
-ENV PYTHONLIBPATH /usr/lib/python2.7/dist-packages
 
 # Add airflow user
 RUN useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow
@@ -23,18 +20,16 @@ RUN apt-get update -yqq \
     && apt-get install -yqq --no-install-recommends \
     netcat \
     curl \
-    python-pip \
-    python-dev \
     libmysqlclient-dev \
     libkrb5-dev \
     libsasl2-dev \
     libssl-dev \
     libffi-dev \
     build-essential \
-    && pip install --install-option="--install-purelib=$PYTHONLIBPATH" cryptography \
-    && pip install --install-option="--install-purelib=$PYTHONLIBPATH" airflow==${AIRFLOW_VERSION} \
-    && pip install --install-option="--install-purelib=$PYTHONLIBPATH" airflow[celery]==${AIRFLOW_VERSION} \
-    && pip install --install-option="--install-purelib=$PYTHONLIBPATH" airflow[mysql]==${AIRFLOW_VERSION} \
+    && pip install airflow \
+    && pip install airflow[crypto] \
+    && pip install airflow[celery] \
+    && pip install airflow[mysql] \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \

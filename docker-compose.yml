@@ -20,10 +20,10 @@ rabbitmq:
         - RABBITMQ_DEFAULT_VHOST=airflow
 
 webserver:
-    image: puckel/docker-airflow
+    image: camil/airflow
     restart: always
-    # volumes:
-    #     - /localpath/to/dags:/usr/local/airflow/dags
+    volumes:
+         - ~/airflow/dags:/usr/local/airflow/dags
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     ports:
@@ -36,7 +36,7 @@ webserver:
     command: webserver
 
 flower:
-    image: puckel/docker-airflow
+    image: camil/airflow
     restart: always
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
@@ -47,8 +47,10 @@ flower:
     command: flower
 
 scheduler:
-    image: puckel/docker-airflow
+    image: camil/airflow
     restart: always
+    volumes:
+        - ~/airflow/dags:/usr/local/airflow/dags
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     links:
@@ -57,8 +59,10 @@ scheduler:
     command: scheduler
 
 worker:
-    image: puckel/docker-airflow
+    image: camil/airflow
     restart: always
+    volumes:
+        - ~/airflow/dags:/usr/local/airflow/dags
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     ports:

@@ -54,6 +54,7 @@ RUN echo "deb http://http.debian.net/debian jessie-backports main" >/etc/apt/sou
     && pip install airflow[password]==${AIRFLOW_VERSION} \
     && pip install airflow[s3]==${AIRFLOW_VERSION} \
     && pip install airflow[slack]==${AIRFLOW_VERSION} \
+    && apt-get remove --purge -yqq build-essential python-pip python-dev libmysqlclient-dev libkrb5-dev libsasl2-dev libssl-dev libffi-dev \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \

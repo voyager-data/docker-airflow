@@ -1,40 +1,59 @@
-# VERSION 1.0
+# VERSION 1.6.2
 # AUTHOR: Camil Blanaru
 # DESCRIPTION: Basic Airflow container
-# BUILD: docker build --rm -t camil/airflow
 # SOURCE: https://github.com/camilb/docker-airflow
+# FORKED from https://github.com/puckel/docker-airflow
 
-FROM python:2.7
+FROM debian:jessie
 MAINTAINER Camil Blanaru
 
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
-
+ENV AIRFLOW_VERSION 1.6.2
 ENV AIRFLOW_HOME /usr/local/airflow
 
-# Add airflow user
-RUN useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow
+# Define en_US.
+ENV LANGUAGE en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
+ENV LC_MESSAGES en_US.UTF-8
+ENV LC_ALL  en_US.UTF-8
 
-RUN apt-get update -yqq \
+RUN echo "deb http://http.debian.net/debian jessie-backports main" >/etc/apt/sources.list.d/backports.list \
+    && apt-get update -yqq \
     && apt-get install -yqq --no-install-recommends \
+    apt-utils\
     netcat \
     curl \
+    python-pip \
+    python-dev \
     libmysqlclient-dev \
     libkrb5-dev \
     libsasl2-dev \
     libssl-dev \
     libffi-dev \
     build-essential \
-    && pip install airflow \
-    && pip install airflow[crypto] \
-    && pip install airflow[celery] \
-    && pip install airflow[mysql] \
-    && pip install airflow[async] \
-    && pip install airflow[ldap] \
-    && pip install airflow[password] \
-    && pip install airflow[s3] \
-    && pip install airflow[slack] \
+    locales \
+    && apt-get install -yqq -t jessie-backports python-requests \
+    && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
+    && locale-gen \
+    && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+    && useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow \
+    && pip install pytz==2015.7 \
+    && pip install cryptography \
+    && pip install pyOpenSSL \
+    && pip install ndg-httpsclient \
+    && pip install pyasn1 \
+    && pip install airflow==${AIRFLOW_VERSION} \
+    && pip install airflow[celery]==${AIRFLOW_VERSION} \
+    && pip install airflow[mysql]==${AIRFLOW_VERSION} \
+    && pip install airflow[async]==${AIRFLOW_VERSION} \
+    && pip install airflow[ldap]==${AIRFLOW_VERSION} \
+    && pip install airflow[password]==${AIRFLOW_VERSION} \
+    && pip install airflow[s3]==${AIRFLOW_VERSION} \
+    && pip install airflow[slack]==${AIRFLOW_VERSION} \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \

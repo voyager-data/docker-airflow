@@ -1,4 +1,4 @@
-# VERSION 1.6.2
+# VERSION 1.7.0
 # AUTHOR: Camil Blanaru
 # DESCRIPTION: Basic Airflow container
 # SOURCE: https://github.com/camilb/docker-airflow
@@ -10,7 +10,7 @@ MAINTAINER Camil Blanaru
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
-ENV AIRFLOW_VERSION 1.6.2
+ENV AIRFLOW_VERSION 1.7.0
 ENV AIRFLOW_HOME /usr/local/airflow
 
 # Define en_US.

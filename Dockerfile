@@ -29,28 +29,16 @@ RUN apt-get update -yqq \
     python-pip \
     python-dev \
     libpq-dev \
-    libkrb5-dev \
-    libsasl2-dev \
     libssl-dev \
-    libffi-dev \
     build-essential \
-    locales \
-    && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
-    && locale-gen \
-    && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow \
-    && pip install pytz==2015.7 \
-    && pip install cryptography \
-    && pip install pyOpenSSL \
-    && pip install ndg-httpsclient \
-    && pip install pyasn1 \
     && pip install airflow==${AIRFLOW_VERSION} \
     && pip install airflow[celery]==${AIRFLOW_VERSION} \
     && pip install airflow[postgres]==${AIRFLOW_VERSION} \
     && pip install airflow[password]==${AIRFLOW_VERSION} \
     && pip install airflow[s3]==${AIRFLOW_VERSION} \
     && pip install airflow[slack]==${AIRFLOW_VERSION} \
-    && apt-get remove --purge -yqq build-essential python-pip python-dev libpq-dev libkrb5-dev libsasl2-dev libssl-dev libffi-dev \
+    && apt-get remove --purge -yqq build-essential python-pip python-dev libpq-dev libssl-dev \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \

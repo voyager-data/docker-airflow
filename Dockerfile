@@ -21,19 +21,18 @@ ENV LC_CTYPE en_US.utf8
 ENV LC_MESSAGES en_US.utf8
 ENV LC_ALL  en_US.utf8
 
-#RUN apt-get update -yqq \
-#    && apt-get install -yqq --no-install-recommends \
-#    apt-utils\
-#    netcat \
-#    curl \
-#    python-pip \
-#    python-dev \
-#    libpq-dev \
-#    libssl-dev \
-#    libffi-dev \
-#    build-essential \
-#    && locale-gen en_US.utf8 \
-RUN locale-gen en_US.utf8 \
+RUN apt-get update -yqq \
+    && apt-get install -yqq --no-install-recommends \
+    apt-utils\
+    netcat \
+    curl \
+    python-pip \
+    python-dev \
+    libpq-dev \
+    libssl-dev \
+    libffi-dev \
+    build-essential \
+    && locale-gen en_US.utf8 \
     && update-locale LANG=en_US.utf8 LC_ALL=en_US.utf8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow \
     && pip install airflow==${AIRFLOW_VERSION} \

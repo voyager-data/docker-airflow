@@ -1,11 +1,11 @@
 # VERSION 1.7.0
-# AUTHOR: Camil Blanaru
+# AUTHOR: Adam Gutcheon
 # DESCRIPTION: Basic Airflow container
-# SOURCE: https://github.com/camilb/docker-airflow
-# FORKED from https://github.com/puckel/docker-airflow
+# SOURCE: https://github.com/voyager-data/docker-airflow
+# FORKED from https://github.com/camilb/docker-airflow
 
-FROM debian:jessie
-MAINTAINER Camil Blanaru
+FROM ubuntu:trusty
+MAINTAINER Adam Gutcheon
 
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
@@ -21,22 +21,20 @@ ENV LC_CTYPE en_US.UTF-8
 ENV LC_MESSAGES en_US.UTF-8
 ENV LC_ALL  en_US.UTF-8
 
-RUN echo "deb http://http.debian.net/debian jessie-backports main" >/etc/apt/sources.list.d/backports.list \
-    && apt-get update -yqq \
+RUN apt-get update -yqq \
     && apt-get install -yqq --no-install-recommends \
     apt-utils\
     netcat \
     curl \
     python-pip \
     python-dev \
-    libmysqlclient-dev \
+    libpq-dev \
     libkrb5-dev \
     libsasl2-dev \
     libssl-dev \
     libffi-dev \
     build-essential \
     locales \
-    && apt-get install -yqq -t jessie-backports python-requests \
     && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
@@ -48,13 +46,11 @@ RUN echo "deb http://http.debian.net/debian jessie-backports main" >/etc/apt/sou
     && pip install pyasn1 \
     && pip install airflow==${AIRFLOW_VERSION} \
     && pip install airflow[celery]==${AIRFLOW_VERSION} \
-    && pip install airflow[mysql]==${AIRFLOW_VERSION} \
-    && pip install airflow[async]==${AIRFLOW_VERSION} \
-    && pip install airflow[ldap]==${AIRFLOW_VERSION} \
+    && pip install airflow[postgres]==${AIRFLOW_VERSION} \
     && pip install airflow[password]==${AIRFLOW_VERSION} \
     && pip install airflow[s3]==${AIRFLOW_VERSION} \
     && pip install airflow[slack]==${AIRFLOW_VERSION} \
-    && apt-get remove --purge -yqq build-essential python-pip python-dev libmysqlclient-dev libkrb5-dev libsasl2-dev libssl-dev libffi-dev \
+    && apt-get remove --purge -yqq build-essential python-pip python-dev libpq-dev libkrb5-dev libsasl2-dev libssl-dev libffi-dev \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \

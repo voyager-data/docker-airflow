@@ -4,10 +4,10 @@ machine:
 
 dependencies:
   override:
-    - docker build -t camil/airflow .
+    - docker build -t voyagerdata/airflow .
 
 test:
   pre:
     - sleep 5
   override:
-    - docker run camil/airflow version |grep '1.7.0'
+    - docker run voyagerdata/airflow version |grep '1.7.0'

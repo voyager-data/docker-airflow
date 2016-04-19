@@ -1,12 +1,12 @@
-mysql:
-    image: tutum/mysql
+postgres:
+    image: postgres:latest
     restart: always
     ports:
-        - "3306:3306"
+        - "5432:5432"
     environment:
-        - MYSQL_USER=airflow
-        - MYSQL_PASS=airflow
-        - ON_CREATE_DB=airflow
+        - POSTGRES_USER=airflow
+        - POSTGRES_PASSWORD=airflow
+        - POSTGRES_INITDB_ARGS=airflow
 
 rabbitmq:
     image: rabbitmq:3-management
@@ -29,7 +29,7 @@ webserver:
     ports:
         - "8080:8080"
     links:
-        - mysql:mysql
+        - postgres:postgres
         - rabbitmq:rabbitmq
         - worker:worker
         - scheduler:scheduler
@@ -54,7 +54,7 @@ scheduler:
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     links:
-        - mysql:mysql
+        - postgres:postgres
         - rabbitmq:rabbitmq
     command: scheduler
 
@@ -68,6 +68,6 @@ worker:
     ports:
         - "8793:8793"
     links:
-        - mysql:mysql
+        - postgres:postgres
         - rabbitmq:rabbitmq
     command: worker

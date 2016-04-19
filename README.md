@@ -1,22 +1,19 @@
 # Airflow Dockerfile
-Circle CI : [![](https://circleci.com/gh/camilb/docker-airflow.svg?style=svg)](https://circleci.com/gh/camilb/docker-airflow)
 
-ImageLayers : [![](https://badge.imagelayers.io/camil/airflow:latest.svg)](https://imagelayers.io/?images=camil/airflow:latest)
-
-This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/airflow) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/camil/airflow/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
+This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/airflow) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/voyagerdata/airflow/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
 
 ## Informations
 
-* Based on python:2.7 official Image (Debian Jessie) [python:2.7](https://registry.hub.docker.com/_/python/)
+* Based on python:2.7 official Image (Ubuntu Trusty) [python:2.7](https://registry.hub.docker.com/_/python/)
 * Install [Docker](https://www.docker.com/)
 * Install [Docker Compose](https://docs.docker.com/compose/install/)
 * Following the Airflow release from [Python Package Index](https://pypi.python.org/pypi/airflow)
 
 ## Installation
 
-        docker pull camil/airflow
+        docker pull voyagerdata/airflow
         cd ~
-        git clone https://github.com/camilb/docker-airflow.git
+        git clone https://github.com/voyager-data/docker-airflow.git
         
 
 ## Build
@@ -24,19 +21,19 @@ This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/a
 For example, if you need to install [Extra Packages](http://pythonhosted.org/airflow/installation.html#extra-package), edit the Dockerfile and than build-it.
 
 		cd ~/docker-airflow
-        docker build --rm -t camil/airflow .
+        docker build --rm -t voyagerdata/airflow .
 
 # Usage
 
-Start the stack (mysql, rabbitmq, airflow-webserver, airflow-scheduler airflow-flower & airflow-worker) :
+Start the stack (postgres, rabbitmq, airflow-webserver, airflow-scheduler airflow-flower & airflow-worker) :
 
 		cd ~/docker-airflow
         docker-compose up -d
 
 If you want to use Ad hoc query, make sure you've configured connections :
 Go to Admin -> Connections and Edit "mysql_default" set this values (equivalent to values in airflow.cfg/docker-compose.yml) :
-- Host : mysql
-- Schema : airflow
+- Host : postgres
+- Schema : postgres
 - Login : airflow
 - Password : airflow
 

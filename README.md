@@ -2,11 +2,9 @@
 
 This repository contains **Dockerfile** of [airflow](https://github.com/airbnb/airflow) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/voyagerdata/airflow/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
 
-## Informations
+## Information
 
-* Based on python:2.7 official Image (Ubuntu Trusty) [python:2.7](https://registry.hub.docker.com/_/python/)
-* Install [Docker](https://www.docker.com/)
-* Install [Docker Compose](https://docs.docker.com/compose/install/)
+* Based on Ubuntu Trusty
 * Following the Airflow release from [Python Package Index](https://pypi.python.org/pypi/airflow)
 
 ## Installation

@@ -8,7 +8,7 @@ postgres:
         - POSTGRES_PASSWORD=airflow
 
 rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:management
     restart: always
     ports:
         - "15672:15672"
@@ -19,7 +19,7 @@ rabbitmq:
         - RABBITMQ_DEFAULT_VHOST=airflow
 
 webserver:
-    image: camil/airflow
+    image: voyagerdata/airflow
     restart: always
     volumes:
          - ~/docker-airflow/dags:/usr/local/airflow/dags
@@ -35,7 +35,7 @@ webserver:
     command: webserver
 
 flower:
-    image: camil/airflow
+    image: voyagerdata/airflow
     restart: always
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
@@ -46,7 +46,7 @@ flower:
     command: flower
 
 scheduler:
-    image: camil/airflow
+    image: voyagerdata/airflow
     restart: always
     volumes:
         - ~/docker-airflow/dags:/usr/local/airflow/dags
@@ -58,7 +58,7 @@ scheduler:
     command: scheduler
 
 worker:
-    image: camil/airflow
+    image: voyagerdata/airflow
     restart: always
     volumes:
         - ~/docker-airflow/dags:/usr/local/airflow/dags

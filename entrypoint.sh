@@ -6,13 +6,9 @@ PG_HOST="postgres"
 PG_PORT="5432"
 RABBITMQ_HOST="rabbitmq"
 RABBITMQ_CREDS="airflow:airflow"
-FERNET_KEY=$(python -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print FERNET_KEY")
-
-# Generate Fernet key
-sed -i "s/{FERNET_KEY}/${FERNET_KEY}/" $AIRFLOW_HOME/airflow.cfg
 
 # wait for rabbitmq
-if [ "$@" = "webserver" ] || [ "$@" = "worker" ] || [ "$@" = "scheduler" ] || [ "$@" = "flower" ] ; then
+if [ "$@" == "webserver" ] || [ "$@" == "worker" ] || [ "$@" == "scheduler" ] || [ "$@" == "flower" ] ; then
   j=0
   while ! curl -sI -u $RABBITMQ_CREDS http://$RABBITMQ_HOST:15672/api/whoami |grep '200 OK'; do
     j=`expr $j + 1`
@@ -26,7 +22,7 @@ if [ "$@" = "webserver" ] || [ "$@" = "worker" ] || [ "$@" = "scheduler" ] || [ 
 fi
 
 # wait for DB
-if [ "$@" = "webserver" ] || [ "$@" = "worker" ] || [ "$@" = "scheduler" ] ; then
+if [ "$@" == "webserver" ] || [ "$@" == "worker" ] || [ "$@" == "scheduler" ] ; then
   i=0
   while ! nc $PG_HOST $PG_PORT >/dev/null 2>&1 < /dev/null; do
     i=`expr $i + 1`

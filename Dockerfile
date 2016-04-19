@@ -38,7 +38,6 @@ RUN apt-get update -yqq \
     && pip install airflow==${AIRFLOW_VERSION} \
     && pip install airflow[celery]==${AIRFLOW_VERSION} \
     && pip install airflow[postgres]==${AIRFLOW_VERSION} \
-    && pip install airflow[password]==${AIRFLOW_VERSION} \
     && pip install airflow[s3]==${AIRFLOW_VERSION} \
     && pip install airflow[slack]==${AIRFLOW_VERSION} \
     && apt-get remove --purge -yqq build-essential python-pip python-dev libpq-dev libffi-dev libssl-dev \

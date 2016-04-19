@@ -14,23 +14,27 @@ ENV AIRFLOW_VERSION 1.7.0
 ENV AIRFLOW_HOME /usr/local/airflow
 
 # Define en_US.
-ENV LANGUAGE en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
-ENV LC_CTYPE en_US.UTF-8
-ENV LC_MESSAGES en_US.UTF-8
-ENV LC_ALL  en_US.UTF-8
+ENV LANGUAGE en_US.utf8
+ENV LANG en_US.utf8
+ENV LC_ALL en_US.utf8
+ENV LC_CTYPE en_US.utf8
+ENV LC_MESSAGES en_US.utf8
+ENV LC_ALL  en_US.utf8
 
-RUN apt-get update -yqq \
-    && apt-get install -yqq --no-install-recommends \
-    apt-utils\
-    netcat \
-    curl \
-    python-pip \
-    python-dev \
-    libpq-dev \
-    libssl-dev \
-    build-essential \
+#RUN apt-get update -yqq \
+#    && apt-get install -yqq --no-install-recommends \
+#    apt-utils\
+#    netcat \
+#    curl \
+#    python-pip \
+#    python-dev \
+#    libpq-dev \
+#    libssl-dev \
+#    libffi-dev \
+#    build-essential \
+#    && locale-gen en_US.utf8 \
+RUN locale-gen en_US.utf8 \
+    && update-locale LANG=en_US.utf8 LC_ALL=en_US.utf8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow \
     && pip install airflow==${AIRFLOW_VERSION} \
     && pip install airflow[celery]==${AIRFLOW_VERSION} \
@@ -38,7 +42,7 @@ RUN apt-get update -yqq \
     && pip install airflow[password]==${AIRFLOW_VERSION} \
     && pip install airflow[s3]==${AIRFLOW_VERSION} \
     && pip install airflow[slack]==${AIRFLOW_VERSION} \
-    && apt-get remove --purge -yqq build-essential python-pip python-dev libpq-dev libssl-dev \
+    && apt-get remove --purge -yqq build-essential python-pip python-dev libpq-dev libffi-dev libssl-dev \
     && apt-get clean \
     && rm -rf \
     /var/lib/apt/lists/* \

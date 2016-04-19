@@ -20,6 +20,7 @@ rabbitmq:
 
 webserver:
     image: voyagerdata/airflow
+    #build: .
     restart: always
     volumes:
          - ~/docker-airflow/dags:/usr/local/airflow/dags
@@ -36,6 +37,7 @@ webserver:
 
 flower:
     image: voyagerdata/airflow
+    #build: .
     restart: always
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
@@ -47,6 +49,7 @@ flower:
 
 scheduler:
     image: voyagerdata/airflow
+    #build: .
     restart: always
     volumes:
         - ~/docker-airflow/dags:/usr/local/airflow/dags
@@ -59,6 +62,7 @@ scheduler:
 
 worker:
     image: voyagerdata/airflow
+    #build: .
     restart: always
     volumes:
         - ~/docker-airflow/dags:/usr/local/airflow/dags

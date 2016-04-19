@@ -31,10 +31,10 @@ if [ "$@" = "webserver" ] || [ "$@" = "worker" ] || [ "$@" = "scheduler" ] ; the
   while ! nc $PG_HOST $PG_PORT >/dev/null 2>&1 < /dev/null; do
     i=`expr $i + 1`
     if [ $i -ge $TRY_LOOP ]; then
-      echo "$(date) - ${MYSQL_HOST}:${MYSQL_PORT} still not reachable, giving up"
+      echo "$(date) - ${PG_HOST}:${PG_PORT} still not reachable, giving up"
       exit 1
     fi
-    echo "$(date) - waiting for ${MYSQL_HOST}:${MYSQL_PORT}... $i/$TRY_LOOP"
+    echo "$(date) - waiting for ${PG_HOST}:${PG_PORT}... $i/$TRY_LOOP"
     sleep 5
   done
   if [ "$@" = "webserver" ]; then

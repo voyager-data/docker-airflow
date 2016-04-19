@@ -6,7 +6,6 @@ postgres:
     environment:
         - POSTGRES_USER=airflow
         - POSTGRES_PASSWORD=airflow
-        - POSTGRES_INITDB_ARGS=airflow
 
 rabbitmq:
     image: rabbitmq:3-management

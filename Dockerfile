@@ -50,8 +50,8 @@ RUN apt-get update -yqq \
     /usr/share/doc \
     /usr/share/doc-base
 
-ADD script/entrypoint.sh ${AIRFLOW_HOME}/entrypoint.sh
-ADD config/airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
+ADD entrypoint.sh ${AIRFLOW_HOME}/entrypoint.sh
+ADD airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
 
 RUN \
     chown -R airflow: ${AIRFLOW_HOME} \

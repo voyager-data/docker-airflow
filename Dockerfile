@@ -1,4 +1,4 @@
-# VERSION 1.7.0
+# VERSION 1.7.1
 # AUTHOR: Adam Gutcheon
 # DESCRIPTION: Basic Airflow container
 # SOURCE: https://github.com/voyager-data/docker-airflow

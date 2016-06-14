@@ -10,7 +10,7 @@ MAINTAINER Adam Gutcheon
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
-ENV AIRFLOW_VERSION 1.7.0
+ENV AIRFLOW_VERSION 1.7.1
 ENV AIRFLOW_HOME /usr/local/airflow
 
 # Define en_US.
@@ -38,8 +38,8 @@ RUN apt-get update -yqq \
     && pip install airflow==${AIRFLOW_VERSION} \
     && pip install airflow[celery]==${AIRFLOW_VERSION} \
     && pip install airflow[hdfs]==${AIRFLOW_VERSION} \
-	&& pip install airflow[postgres]==${AIRFLOW_VERSION} \
-	&& pip install airflow[rabbitmq]==${AIRFLOW_VERSION} \
+    && pip install airflow[postgres]==${AIRFLOW_VERSION} \
+    && pip install airflow[rabbitmq]==${AIRFLOW_VERSION} \
     && pip install airflow[s3]==${AIRFLOW_VERSION} \
     && pip install airflow[slack]==${AIRFLOW_VERSION} \
     && apt-get remove --purge -yqq build-essential python-pip python-dev libpq-dev libffi-dev libssl-dev \
@@ -54,6 +54,7 @@ RUN apt-get update -yqq \
 
 ADD entrypoint.sh ${AIRFLOW_HOME}/entrypoint.sh
 ADD airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
+ADD hosts /etc/hosts
 
 RUN \
     chown -R airflow: ${AIRFLOW_HOME} \

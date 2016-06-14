@@ -54,7 +54,6 @@ RUN apt-get update -yqq \
 
 ADD entrypoint.sh ${AIRFLOW_HOME}/entrypoint.sh
 ADD airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
-ADD hosts /etc/hosts
 
 RUN \
     chown -R airflow: ${AIRFLOW_HOME} \

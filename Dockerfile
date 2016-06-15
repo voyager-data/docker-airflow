@@ -10,7 +10,7 @@ MAINTAINER Adam Gutcheon
 # Never prompts the user for choices on installation/configuration of packages
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
-ENV AIRFLOW_VERSION 1.7.1
+ENV AIRFLOW_VERSION 1.7.1.3
 ENV AIRFLOW_HOME /usr/local/airflow
 
 # Define en_US.

@@ -22,7 +22,7 @@ webserver:
     image: voyagerdata/airflow
     restart: always
     volumes:
-         - ~/docker-airflow/dags:/usr/local/airflow/dags
+         - .:/usr/local/airflow
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     ports:
@@ -49,7 +49,7 @@ scheduler:
     image: voyagerdata/airflow
     restart: always
     volumes:
-        - ~/docker-airflow/dags:/usr/local/airflow/dags
+        - .:/usr/local/airflow
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     links:
@@ -61,7 +61,7 @@ worker:
     image: voyagerdata/airflow
     restart: always
     volumes:
-        - ~/docker-airflow/dags:/usr/local/airflow/dags
+        - .:/usr/local/airflow
     environment:
         - AIRFLOW_HOME=/usr/local/airflow
     ports:

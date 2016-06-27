@@ -7,6 +7,10 @@ PG_PORT="5432"
 RABBITMQ_HOST="rabbitmq"
 RABBITMQ_CREDS="airflow:airflow"
 
+# Generate Fernet key
+FERNET_KEY=$(python -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print FERNET_KEY")
+sed -i "s/\$FERNET_KEY/${FERNET_KEY}/" $AIRFLOW_HOME/airflow.cfg
+
 # wait for rabbitmq
 if [ "$@" == "webserver" ] || [ "$@" == "worker" ] || [ "$@" == "scheduler" ] || [ "$@" == "flower" ] ; then
   j=0

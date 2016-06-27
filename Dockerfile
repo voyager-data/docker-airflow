@@ -35,6 +35,7 @@ RUN apt-get update -yqq \
     && locale-gen en_US.utf8 \
     && update-locale LANG=en_US.utf8 LC_ALL=en_US.utf8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow \
+    && pip install cryptography \
     && pip install airflow==${AIRFLOW_VERSION} \
     && pip install airflow[celery]==${AIRFLOW_VERSION} \
     && pip install airflow[hdfs]==${AIRFLOW_VERSION} \

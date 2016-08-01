@@ -28,6 +28,7 @@ RUN apt-get update -yqq \
     curl \
     python-pip \
     python-dev \
+    libpq5 \
     libpq-dev \
     libssl-dev \
     libffi-dev \
